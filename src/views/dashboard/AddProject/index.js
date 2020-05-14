@@ -81,6 +81,7 @@ export const AddProject = (props) =>{
     const firestore = useFirestore()
 
     const submit = () => {
+        
         if(state.projectName === ''){
             NotificationManager.error('Enter a Project Name')
         }else{

@@ -26,11 +26,14 @@ export const signInWithFirebase = (user, history) => async(dispatch, getState, {
 
    await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
       .then((success) => {
-         console.log(success)
-         NotificationManager.success('Logged In successfully.');
-         dispatch({ type: LOGIN_USER_SUCCESS, payload: success.user});
-         localStorage.setItem('myapp_user', JSON.stringify(user))
-         history.push('/')
+         
+         const firestore = getFirestore();
+         firestore.collection('users').doc(success.user.uid).get().then(user=>{
+            NotificationManager.success('Logged In successfully.');
+            dispatch({ type: LOGIN_USER_SUCCESS, payload: user.data()});
+            localStorage.setItem('myapp_user', JSON.stringify(user.data()))
+            history.push('/')
+         })
       })
       .catch((error) => {
          console.log(error)

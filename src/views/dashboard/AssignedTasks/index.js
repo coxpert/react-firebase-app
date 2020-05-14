@@ -1,6 +1,7 @@
 import React from 'react'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AssinedTaskList from './AssignedTaskList';
+import {SideBar} from 'Components'
 
 const styles = {
     root:{
@@ -55,12 +56,10 @@ export const AssignedTasks = (props) =>{
 
     return(
         <div style={styles.root}>
-            <div style={styles.header}>
-                <div style={styles.backButton} onClick={back}>
-                    <ArrowBackIcon />
-                </div>
-                <h3 style={{marginTop: 5}}>ASSIGNED TASKS</h3>
-            </div>
+            <SideBar 
+                title={'ASSIGNED TASKS'}
+                backLink = {'/'}
+            />
             <div style={styles.content}>
                 <AssinedTaskList />
             </div>

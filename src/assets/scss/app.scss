@@ -1,8 +1,17 @@
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+html, body{
+    height: 100%;
+}
+
+body>#root{
+    height: 100%;
+}
+
 body{
 
     font-family: 'Source Sans Pro';
+    background-image: url('../img/back.png');
     
     input:-webkit-autofill,
     input:-webkit-autofill:hover,

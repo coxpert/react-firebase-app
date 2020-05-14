@@ -9,7 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CanvasDraw from "react-canvas-draw";
 import SaveIcon from '@material-ui/icons/Save';
-import {NotificationManager} from 'react-notifications'
+import {NotificationManager} from 'react-notifications';
 import AddIcon from '@material-ui/icons/Add';
 import {Typography} from '@material-ui/core';
 
@@ -81,7 +81,6 @@ export const PhotoImage = (props) =>{
         if(photoCroping){
             props.setState({
                 ...props.state,
-                photoFile: null,
                 photoUrl: cropper1.current.getCroppedCanvas().toDataURL()
             }) 
             setPhotoCroping(false); 
@@ -159,8 +158,8 @@ export const PhotoImage = (props) =>{
                             <div {...getRootProps()}  style={styles.imageBox}>
                                 <input {...getInputProps()} />
                                 <div style = {styles.addphoto}>
-                                    <AddIcon style={{fontSize: 30, fontWeight: 'bold'}}/>
-                                    <Typography  style={{fontSize: 30, fontWeight: 'bold'}}>Add Photo </Typography>
+                                    <AddIcon />
+                                    <Typography>Add Photo</Typography>
                                 </div>
                             </div>
                         )}

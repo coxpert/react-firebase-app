@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { useFirestoreConnect} from 'react-redux-firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { DetailContent } from './DetailContent'
+import {SideBar} from 'Components'
+
 
 export const ReportProjectDetail = (props) =>{
 
@@ -23,22 +25,15 @@ export const ReportProjectDetail = (props) =>{
         ({ firestore: { data } }) => data.projects && data.projects[report?report.projectId:0]
     )
 
-    const back = () => {
-        props.history.push(`/report-project/${report.projectId}`)
-    }
-
-    
     return(
         <Fragment>
             {
                 project?
                 <div style={styles.content}>
-                    <div style={styles.header}>
-                        <div style={styles.backButton} onClick={back}>
-                            <ArrowBackIcon />
-                        </div>
-                        <h2>{project.projectName}</h2>
-                    </div>
+                    <SideBar 
+                        title={project.projectName}
+                        backLink = {`/report-project/${report.projectId}`}
+                    />
                     { report && <DetailContent report={ report } reportId={reportId} {...props}/> }
                 </div>:
                 <div style={styles.fullContainer}>

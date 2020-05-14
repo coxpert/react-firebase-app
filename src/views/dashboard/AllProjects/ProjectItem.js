@@ -42,10 +42,17 @@ const styles = {
     },
     deleteIcon:{
         borderRadius:'9999px',
-        backgroundColor:'green',
+        backgroundColor:'rgb(0, 151, 62)',
         padding: 5,
         fontSize: 40,
         color:'#ff0000'
+    },
+    deleteIconInActive:{
+        borderRadius:'9999px',
+        backgroundColor:'rgb(0, 151, 62, 0.5)',
+        padding: 5,
+        fontSize: 40,
+        color:'#ff00007f'
     }
 }
 
@@ -78,9 +85,16 @@ const ProjectItem = (props) => {
                 <div onClick={openProjectDetail} style={{color:'white'}}>
                     {project.projectName}
                 </div>
-                <div style={styles.deleteButtonContainer} onClick= {()=>{setOpen(true)}} >
-                    <DeleteIcon style={styles.deleteIcon} />
-                </div>
+                {
+                    (user.id == project .userId) ?
+                    <div style={styles.deleteButtonContainer} onClick= {()=>{setOpen(true)}} >
+                        <DeleteIcon style={styles.deleteIcon} />
+                    </div>:
+                    <div style={styles.deleteButtonContainer}>
+                        <DeleteIcon style={styles.deleteIconInActive} />
+                    </div>
+                }
+                
             </div>
             <DeleteConfirmDialog
                 open = {open}

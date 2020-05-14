@@ -23,12 +23,10 @@ import {MyProjects} from 'Views/dashboard/MyProjects'
 
 const styles = {
     root: {
-        backgroundImage: `url(${require('Assets/img/back.png')})`,
         width:'100%',
         maxWidth:'1024px',
-        height:'100vh',
         margin:'auto',
-        overflowY:'scroll'
+        height: '100%',
     },
 }
 

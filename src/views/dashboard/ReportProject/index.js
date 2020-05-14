@@ -18,9 +18,7 @@ export const ReportProject = (props) =>{
         ({ firestore: { data } }) => data.projects && data.projects[projectId]
       )
       
-    const back = () => {
-        props.history.push('/all-project')
-    }
+    console.log(project)
 
     return(
         <div style={styles.root}>

@@ -90,13 +90,13 @@ export const styles = {
         position:'relative'
     },
     addphoto: {
-        display:'flex',
-        width: 300,
-        height: 300,
+        display:'flxe',
+        width: '100%',
+        height: '100%',
         justifyContent:'center',
         alignItems:'center',
         color:'white',
-        fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight:'bold',
+        fontSize: 24
     }
 }
