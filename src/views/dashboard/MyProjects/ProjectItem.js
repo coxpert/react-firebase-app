@@ -2,9 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {DeleteConfirmDialog} from './DeleteConfirmDialog';
-import ConfirmPassword from './ConfirmPassword'
-import {withRouter} from 'react-router-dom'
-import {useSelector} from 'react-redux'
 
 const styles = {
     root:{
@@ -51,33 +48,21 @@ const styles = {
 
 const ProjectItem = (props) => {
 
-    const {project, history} = props;
-    const user = useSelector(state=>state.authUser.user)
+    const {project} = props;
     const [open, setOpen] = React.useState(false)
-    const [openpassword, setOpenPassword] = React.useState(false)
 
     const handleClose = () => {
         setOpen(false)
     }
 
-    const openProjectDetail = () => {
-        if(project.userId === user.id){
-            history.push(`/report-project/${project.id}`)
-        }else{
-            setOpenPassword(true)
-        }
-    }
-
-    const handleClosePassword = () =>{
-        setOpenPassword(false)
-    }
-
     return (
         <div style={styles.root}>
             <div style={styles.row}>
-                <div onClick={openProjectDetail} style={{color:'white'}}>
-                    {project.projectName}
-                </div>
+                <Link  to={`/report-project/${project.id}`} style={styles.link}>
+                    <div>
+                        {project.projectName}
+                    </div>
+                </Link>
                 <div style={styles.deleteButtonContainer} onClick= {()=>{setOpen(true)}} >
                     <DeleteIcon style={styles.deleteIcon} />
                 </div>
@@ -87,13 +72,8 @@ const ProjectItem = (props) => {
                 handleClose = {handleClose}
                 project = {project}
             />
-            <ConfirmPassword
-                open = {openpassword}
-                handleClose = {handleClosePassword}
-                project = {project}
-            />
         </div>
     )
 }
 
-export default withRouter(ProjectItem);
+export default ProjectItem;

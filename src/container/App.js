@@ -19,6 +19,7 @@ import {SignedOffTasks} from 'Views/dashboard/SignedOffTasks'
 import {SnagDetails} from 'Views/dashboard/SnagDetails'
 import {ReportProjectDetail} from 'Views/dashboard/ReportProjectDetail'
 import {AssignApprove} from 'Views/dashboard/AssignApprove'
+import {MyProjects} from 'Views/dashboard/MyProjects'
 
 const styles = {
     root: {
@@ -49,6 +50,7 @@ const MainApp = (props) =>{
                     }
                     <Route path="/add-project" component={AddProject}/>
                     <Route path="/all-project" component={AllProjects}/>
+                    <Route path="/my-project" component={MyProjects}/>
                     <Route path="/approved-tasks" component={ApprovedTasks}/>
                     <Route path="/assigned-approve" component={AssignApprove}/>
                     <Route path="/assigned-tasks" component={AssignedTasks}/>

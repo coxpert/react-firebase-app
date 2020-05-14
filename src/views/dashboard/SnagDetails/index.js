@@ -1,25 +1,19 @@
 import React, {useState, useRef} from 'react'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import {getTheDate} from 'Helpers/helper';
 import { styles } from './styles'
-import ReactCropper from 'react-cropper';
-import Image from 'material-ui-image'
-import BackupIcon from '@material-ui/icons/Backup';
-import CropIcon from '@material-ui/icons/Crop';
-import Divider from '@material-ui/core/Divider';
 import { Button } from '@material-ui/core';
 import { NotificationManager } from 'react-notifications'
 import { useSelector } from 'react-redux';
 import { useFirebase, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import { v4 as uuidv4 } from 'uuid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Dropzone from 'react-dropzone'
 import { CameraView } from 'Components'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import {SideBar} from 'Components'
+import {PhotoImage} from './PhotoImage'
+import {DrawingImage} from './DrawingImage'
 import {
     BrowserView,
     MobileView,
@@ -41,9 +35,7 @@ export const SnagDetails = (props) =>{
         ({ firestore: { data } }) => data.projects && data.projects[projectId]
       )
 
-    const date = new Date();
-    const [photoCroping, setPhotoCroping] = useState(false)
-    const [drawingCroping, setDrawingCroping] = useState(false)
+    const date = new Date()
     const [uploading, setUploading] = useState(false);
     const [loadingText, setloadingText] = useState('Lading...');
 
@@ -61,52 +53,6 @@ export const SnagDetails = (props) =>{
         isdrawingImage:false,
     })
 
-    const back = () => {
-        props.history.push(`/report-project/${projectId}`)
-    }
-
-    const crop1 = () => {
-        console.log(cropper1.current.props.src);
-    }
-
-    const crop2 = () => {
-        console.log(cropper2.getCroppedCanvas().toDataURL());
-    }
-
-
-    const handlePhoto = (e) =>{
-        e.preventDefault();
-        let reader = new FileReader();
-        let file = e.target.files[0];
-    
-  
-        reader.onloadend = () => {
-          setState({
-            ...state,
-            photoFile: file,
-            photoUrl: reader.result
-          });
-        }
-        reader.readAsDataURL(file)
-    }
-    
-
-    const handleDrawing = (e) =>{
-        e.preventDefault();
-        let reader = new FileReader();
-        let file = e.target.files[0];
-        
-        console.log(file.type);
-
-        reader.onloadend = () => {
-            setState({
-                ...state,
-                drawingFile: file,
-                drawingUrl: reader.result
-            });
-        }
-        reader.readAsDataURL(file)
-    }
 
     const save = async (assigned) =>{
 
@@ -124,7 +70,6 @@ export const SnagDetails = (props) =>{
                 assigned: assigned,
             }
 
-            console.log(data)
             setUploading(true)
 
             if(state.photoFile){
@@ -210,54 +155,9 @@ export const SnagDetails = (props) =>{
         })
     }
 
-    const onDrop1 = (files) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-            setState({
-                ...state,
-                photoFile: files[0],
-                photoUrl: reader.result
-              });
-        }
-        reader.readAsDataURL(files[0])
-    }
-    
-    const onDrop2 = (files) => {
-        const reader = new FileReader()
-        console.log(files[0].type);
-        reader.onload = () => {
-            setState({
-                ...state,
-                drawingFile: files[0],
-                drawingUrl: reader.result
-            });
-        }
-        reader.readAsDataURL(files[0])
-    }
-
     const isImage = (type) => {
         // /image*/.test()
     }
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [anchorE2, setAnchorE2] = React.useState(null);
-
-    const handleClick1 = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose1 = () => {
-        setAnchorEl(null);
-    };
-        
-    
-    const handleClick2 = (event) => {
-        setAnchorE2(event.currentTarget);
-    };
-
-    const handleClose2  = () => {
-        setAnchorE2(null);
-    };
 
     const [isopenCamera, setOpenCamera] = React.useState(false)
 
@@ -275,15 +175,13 @@ export const SnagDetails = (props) =>{
             </BrowserView>
         </div>:
         <div style={styles.root}>
-            <div style={styles.header}>
-                <div style={styles.backButton} onClick={back}>
-                    <ArrowBackIcon />
-                </div>
-                <h2 style={{ marginTop: 5 }}>{project && project.projectName}</h2>
-            </div>
+            <SideBar 
+                title={project && project.projectName}
+                backLink={`/report-project/${projectId}`}
+            />
             {
                 project && (!uploading) ?
-                <div  className="container bg-white" style={{display:'flex', flexDirection:'column'}}>
+                <div  className="container bg-white" style={{display:'flex', flexDirection:'column', marginTop: 60}}>
                     <div className="date-time" style={{marginTop: '20px'}}>
                         <span>DATE AND TIME</span>
                         <strong>{state.dateTime}</strong>
@@ -311,136 +209,9 @@ export const SnagDetails = (props) =>{
                         />
                     </FormControl>
 
+                    <PhotoImage state={state} setState={setState} />
 
-                    <div style={{ marginTop: '20px'}}>
-                        <div style={{display:'flex', justifyContent:'space-between', width:'100%', maxWidth:300, margin:'auto'}}>
-                            <div>
-                                PHOTO
-                            </div>
-                            <div style={{display:'flex',width:'fit-content', alignItems:'center', border:'solid 1px #9090907f', borderRadius:'4px', marginBottom:'2px'}}>
-                                <div>
-                                    <div aria-controls="simple-menu" aria-haspopup="true"  onClick={handleClick1} >
-                                        <BackupIcon style={styles.icon}/>
-                                    </div>
-                                    <Menu
-                                        id="simple-menu"
-                                        anchorEl={anchorEl}
-                                        keepMounted
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleClose1}
-                                    >
-                                        <MenuItem >
-                                            <label htmlFor="photo">Browse</label>
-                                            <input id='photo' hidden type="file" accept="images/*" onChange={handlePhoto}/>
-                                        </MenuItem>
-                                        <MenuItem onClick={openCamera} >Camera</MenuItem>
-                                    </Menu>
-                                </div>
-                                    <Divider orientation="vertical" />
-                                
-                                    <div onClick={()=>{setPhotoCroping(!photoCroping)}}><CropIcon style={styles.icon}  /></div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div>
-                            {!state.photoUrl && <Dropzone onDrop={onDrop1} accept="image/*">
-                                {({getRootProps, getInputProps}) => (
-                                    <div {...getRootProps()}  style={styles.imageBox}>
-                                        <input {...getInputProps()} />
-                                        <Image 
-                                            src={require('Assets/img/add-file.svg')} 
-                                            aspectRatio = {1}
-                                        />
-                                    </div>
-                                )}
-                            </Dropzone>}
-                        </div>
-                        {
-
-                            state.photoUrl && (photoCroping?
-                            <ReactCropper
-                                ref={cropper1}
-                                src={state.photoUrl} 
-                                style={styles.imagePreviewBox}
-                                guides={false}
-                                crop={crop1} 
-                                rotatable = {true}
-                            />:
-                            <div style={styles.imagePreviewBox}>
-                                <Image 
-                                    src={state.photoUrl} 
-                                    aspectRatio = {1}
-                                />
-                            </div>  )
-                        }
-                    </div>
-                
-                
-                    <div style={{ marginTop: '20px'}}>
-                        <div style={{display:'flex', justifyContent:'space-between', width:'100%', maxWidth:300, margin:'auto'}}>
-                            <div>
-                                DRAWING
-                            </div>
-                            <div style={{display:'flex',width:'fit-content', alignItems:'center', border:'solid 1px #9090907f', borderRadius:'4px', marginBottom:'2px'}}>
-                                <div>
-                                    <div aria-controls="simple-menu" aria-haspopup="true"  onClick={handleClick2} >
-                                        <BackupIcon style={styles.icon}/>
-                                    </div>
-                                    <Menu
-                                        id="simple-menu"
-                                        anchorEl={anchorE2}
-                                        keepMounted
-                                        open={Boolean(anchorE2)}
-                                        onClose={handleClose2}
-                                    >
-                                        <MenuItem >
-                                            <label htmlFor="drawing">Browse</label>
-                                            <input id='drawing' hidden type="file" accept="images/*" onChange={handleDrawing}/>
-                                        </MenuItem>
-                                        <MenuItem onClick={openCamera} >Camera</MenuItem>
-                                    </Menu>
-                                </div>
-                                <Divider orientation="vertical" />
-                                
-                                <div onClick={()=>{setDrawingCroping(!photoCroping)}}><CropIcon style={styles.icon}  /></div>
-                                    
-                                <Divider orientation="vertical" />
-                                {state.isdrawingImage && <div onClick={()=>{setDrawingCroping(!drawingCroping)}}><CropIcon style={styles.icon}  /></div>}
-                            </div>
-                        </div>
-
-                        <div>
-                            {!state.drawingUrl && <Dropzone onDrop={onDrop2}>
-                                {({getRootProps, getInputProps}) => (
-                                    <div {...getRootProps()}  style={styles.imageBox}>
-                                        <input {...getInputProps()} />
-                                        <Image 
-                                            src={require('Assets/img/add-file.svg')} 
-                                            aspectRatio = {1}
-                                        />
-                                    </div>
-                                )}
-                            </Dropzone>}
-                        </div>
-                        {
-                            state.drawingUrl && ( drawingCroping?
-                            <ReactCropper
-                                ref={cropper2}
-                                src={state.drawingUrl} 
-                                style={styles.imagePreviewBox}
-                                guides={false}
-                                crop={crop2} 
-                                rotatable = {true}
-                            />:
-                            <div style={styles.imagePreviewBox}>
-                                <Image 
-                                    src={state.drawingUrl} 
-                                    aspectRatio = {1}
-                                />
-                            </div> )
-                        }
-                    </div>
+                    <DrawingImage  state={state} setState={setState} />
 
                     <FormControl fullWidth variant="outlined" style={{marginTop: '20px'}}>
                         <InputLabel htmlFor="outlined-adornment-amount">Assignee Name</InputLabel>

@@ -300,7 +300,7 @@ export const DetailContent = (props) =>{
                                     <div {...getRootProps()}  style={styles.imageBox}>
                                         <input {...getInputProps()} />
                                         <Image 
-                                            src={require('Assets/img/add-file.svg')} 
+                                            src={require('Assets/img/addphoto.png')} 
                                             aspectRatio = {1}
                                         />
                                     </div>
@@ -366,7 +366,7 @@ export const DetailContent = (props) =>{
                                     <div {...getRootProps()}  style={styles.imageBox}>
                                         <input {...getInputProps()} />
                                         <Image 
-                                            src={require('Assets/img/add-file.svg')} 
+                                            src={require('Assets/img/adddraw.png')} 
                                             aspectRatio = {1}
                                         />
                                     </div>

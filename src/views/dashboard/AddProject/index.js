@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import CallMadeIcon from '@material-ui/icons/CallMade';
-
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,19 +7,9 @@ import {NotificationManager} from 'react-notifications'
 
 import { useFirestore } from 'react-redux-firebase'
 
-import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {SideBar} from 'Components'
 import {useSelector} from 'react-redux'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    '& > * + *': {
-      marginLeft: theme.spacing(2),
-    },
-  },
-}));
 
 
 const styles = {

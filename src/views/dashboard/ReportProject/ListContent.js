@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ReportsProjectItem from './ReportsProjectItem'
-import AddIcon from '@material-ui/icons/Add';
-import { Link } from 'react-router-dom'
+
+
 const styles = {
     root:{
         width:'100%',
@@ -40,11 +40,9 @@ const ListContent = (props) => {
     const {match} = props;
     const projectId = match.params.projectId;
 
-    useFirestoreConnect([{collection:'reports', where:['projectId','==', projectId], where:['assigned','==', false]}])
+    useFirestoreConnect([{collection:'reports', where:[['projectId','==', projectId],['assigned','==', false]]}])
 
     const reports = useSelector(state => state.firestore.ordered.reports)
-
-    console.log(reports);
 
     return (
         <div style={styles.root}>

@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import './style.scss'
 import {styles} from './style'
 import  ListContent  from './ListContent'
+import {SideBar} from 'Components';
 
 export const ReportProject = (props) =>{
 
@@ -24,12 +25,10 @@ export const ReportProject = (props) =>{
     return(
         <div style={styles.root}>
             <div style={styles.content}>
-                <div style={styles.header}>
-                    <div style={styles.backButton} onClick={back}>
-                        <ArrowBackIcon />
-                    </div>
-                    <h3 style={{marginTop: 5}}>ALL PROJECT TAB</h3>
-                </div>
+                <SideBar 
+                    title = {project?project.projectName:''}
+                    backLink = '/all-project'
+                />
                 <div>
                     {
                         project?

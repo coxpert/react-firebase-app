@@ -45,10 +45,11 @@ const useStyles = makeStyles(()=>({
     }
 }))
 
+
 const ProjectList = () => {
     const classes = useStyles();
     const user = useSelector(state=>state.authUser.user);
-    useFirestoreConnect([{collection: 'projects'}])
+    useFirestoreConnect([{collection: 'projects', where:['userId', '==', user.id]}])
     const projects = useSelector(state => state.firestore.ordered.projects) 
     console.log(projects)
     return (

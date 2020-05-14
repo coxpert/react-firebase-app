@@ -81,11 +81,13 @@ export const styles = {
         border:'solid 1px #8080807f', 
         margin:'auto',
         padding: 80,
+        backgroundColor:'rgb(0, 151, 62)'
     },
     imagePreviewBox:{
         height: 300, 
         width: 300, 
         border:'solid 1px #8080807f', 
         margin:'auto',
+        position:'relative'
     }
 }

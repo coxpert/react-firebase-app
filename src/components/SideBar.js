@@ -24,6 +24,7 @@ import {Avatar, Box} from '@material-ui/core'
 import {useDispatch} from 'react-redux'
 import { signOutWithFirebase } from 'Actions';
 import {withRouter} from 'react-router-dom'
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 const drawerWidth = 240;
 
@@ -181,37 +182,63 @@ const SideBar = (props) => {
         </Box>
         <Divider />
         <List>
-            <ListItem button >
-              <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
-              <ListItemText primary={'All Projects'} />
-            </ListItem>
+            <Link to="/all-project">
+              <ListItem button >
+                <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                <ListItemText primary={'All Projects'} />
+              </ListItem>
+            </Link>
 
-            <ListItem button >
-              <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
-              <ListItemText primary={'Assigned Tasks'} />
-            </ListItem>
+            <Link to="/my-project">
+              <ListItem button >
+                <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                <ListItemText primary={'My Projects'} />
+              </ListItem>
+            </Link>
 
-            <ListItem button >
-              <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
-              <ListItemText primary={'Signed Off Tasks'} />
-            </ListItem>
+            <Link to="/assigned-tasks">
+              <ListItem button >
+                <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                <ListItemText primary={'Assigned Tasks'} />
+              </ListItem>
+            </Link>
 
-            <ListItem button >
-              <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
-              <ListItemText primary={'Approved Task'} />
-            </ListItem>
+            <Link to="/signed-off-task">
+              <ListItem button >
+                <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                <ListItemText primary={'Signed Off Tasks'} />
+              </ListItem>
+            </Link>
 
+            <Link to="/approved-tasks">
+              <ListItem button >
+                <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                <ListItemText primary={'Approved Task'} />
+              </ListItem>
+            </Link>
         </List>
         <Divider />
         <List>
+            <Link to="/add-project">
+              <ListItem button >
+                <ListItemIcon><PlaylistAddIcon /></ListItemIcon>
+                <ListItemText primary={'Add Project'} />
+              </ListItem>
+            </Link>
+        </List>
+        <Divider />
+        <List>
+          <Link to="/my-profile">
             <ListItem button >
               <ListItemIcon><PermContactCalendarIcon /></ListItemIcon>
               <ListItemText primary={'My Profile'} />
             </ListItem>
-            <ListItem button onClick={signOut}>
-              <ListItemIcon><PowerSettingsNewIcon style={{color:'red'}} /></ListItemIcon>
-              <ListItemText primary={'Log Out'} />
-            </ListItem>
+          </Link>
+            
+          <ListItem button onClick={signOut}>
+            <ListItemIcon><PowerSettingsNewIcon style={{color:'red'}} /></ListItemIcon>
+            <ListItemText primary={'Log Out'} />
+          </ListItem>
         </List>
       </Drawer>
     </div>
