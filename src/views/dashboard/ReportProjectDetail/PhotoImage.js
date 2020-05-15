@@ -158,8 +158,8 @@ export const PhotoImage = (props) =>{
                             <div {...getRootProps()}  style={styles.imageBox}>
                                 <input {...getInputProps()} />
                                 <div style = {styles.addphoto}>
-                                    <AddIcon />
-                                    <Typography>Add Photo</Typography>
+                                    <AddIcon   style={{fontSize: 30, fontWeight: 'bold'}} />
+                                    <Typography  style={{fontSize: 30, fontWeight: 'bold'}} >Add Photo</Typography>
                                 </div>
                             </div>
                         )}

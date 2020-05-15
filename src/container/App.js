@@ -12,20 +12,22 @@ import ForgotPassword from 'Views/auth/ForgotPassword'
 import {AddProject} from 'Views/dashboard/AddProject'
 import {AllProjects} from 'Views/dashboard/AllProjects'
 import {ApprovedTasks} from 'Views/dashboard/ApprovedTasks'
-import {AssignedTasks} from 'Views/dashboard/AssignedTasks'
 import {AssignSubmit} from 'Views/dashboard/AssignSubmit'
 import {ReportProject} from 'Views/dashboard/ReportProject'
 import {SignedOffTasks} from 'Views/dashboard/SignedOffTasks'
 import {SnagDetails} from 'Views/dashboard/SnagDetails'
 import {ReportProjectDetail} from 'Views/dashboard/ReportProjectDetail'
-import {AssignApprove} from 'Views/dashboard/AssignApprove'
+import AssignApprove from 'Views/dashboard/AssignApprove'
 import {MyProjects} from 'Views/dashboard/MyProjects'
+import {AssignedTasks} from 'Views/dashboard/AssignedTasks/AssignedTasks';
+import {AssignedProjects} from 'Views/dashboard/AssignedProjects';
 
 const styles = {
     root: {
         width:'100%',
         maxWidth:'1024px',
         margin:'auto',
+        boxShadow: '0 0 20px 5px #0000007f',
         height: '100%',
     },
 }
@@ -50,11 +52,16 @@ const MainApp = (props) =>{
                     <Route path="/all-project" component={AllProjects}/>
                     <Route path="/my-project" component={MyProjects}/>
                     <Route path="/approved-tasks" component={ApprovedTasks}/>
-                    <Route path="/assigned-approve" component={AssignApprove}/>
-                    <Route path="/assigned-tasks" component={AssignedTasks}/>
+                    <Route path="/assigned-approve/:reportId" component={AssignApprove}/>
+                    
+                    <Route path="/assigned-projects" exact component={AssignedProjects}/>
+                    <Route path="/assigned-projects/:projectId" component={AssignedTasks}/>
+
                     <Route path="/assign-submit" component={AssignSubmit}/>
+
                     <Route path="/report-project/:projectId" component={ReportProject}/>
                     <Route path="/reports-project/detail/:reportId" component={ReportProjectDetail}/>
+
                     <Route path="/signed-off-task" component={SignedOffTasks}/>
                     <Route path="/snag-details/:projectId" component={SnagDetails}/>
                     <Route path="/" component={Dashboard}/>
@@ -64,7 +71,6 @@ const MainApp = (props) =>{
     )
 }
 
-// map state to props
 const mapStateToProps = ({ authUser }) => {
     const { user } = authUser;
     return { user };

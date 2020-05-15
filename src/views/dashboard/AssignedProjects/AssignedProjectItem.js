@@ -9,7 +9,6 @@ const styles = {
     },
     row:{
         width:'100%',
-        // backgroundColor:'#3030307f',
         backgroundColor:'#30303022',
         display:'flex',
         justifyContent:'center',
@@ -28,16 +27,16 @@ const styles = {
     }
 }
 
-const AssignedTaskItem = (props) => {
+const AssignedProjectItem = (props) => {
 
-    const {report} = props;
+    const {project} = props;
 
     return (
         <div style={styles.root}>
             <div style={styles.row}>
-                <Link to={`/assigned-approve/${report.id}`} style={styles.link}>
+                <Link to={`/assigned-projects/${project.id}`} style={styles.link}>
                     <div  style={{color:'white'}}>
-                        {report.area}
+                        {project.projectName}
                     </div>
                 </Link>
             </div>
@@ -45,4 +44,4 @@ const AssignedTaskItem = (props) => {
     )
 }
 
-export default AssignedTaskItem;
+export default AssignedProjectItem;

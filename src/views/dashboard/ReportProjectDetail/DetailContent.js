@@ -71,11 +71,21 @@ export const DetailContent = (props) =>{
             }
                     
             firestore.collection('reports').doc(reportId).set({...data},{merge: true}).then(()=>{
-                setUploading(false)
-                NotificationManager.success('Successfully Updated')
-                if(assigned){
-                   props.history.push(`/assigned-tasks`) 
-                }
+                firestore.collection('projects').doc(report.projectId).set({
+                    assigned: assigned,
+                },{merge: true}).then(()=>{
+                    setUploading(false)
+                    NotificationManager.success('Successfully Reported')
+                    if(assigned){
+                         history.push(`/assigned-projects`)
+                    }else{
+                        history.push(`/report-project/${report.projectId}`)
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                    setUploading(false)
+                    NotificationManager.error('*96+-6Assign Project Failed!')
+                })
             })
         }
     }

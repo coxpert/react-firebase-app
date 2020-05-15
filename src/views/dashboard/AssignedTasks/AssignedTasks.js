@@ -1,5 +1,4 @@
 import React from 'react'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AssinedTaskList from './AssignedTaskList';
 import {SideBar} from 'Components'
 
@@ -8,7 +7,8 @@ const styles = {
         width:'100%',
         display:'flex',
         alignItems:'center',
-        flexDirection:'column'
+        flexDirection:'column',
+        height: '100%',
     },
     header:{
         width: '100%',
@@ -41,24 +41,20 @@ const styles = {
     content: {
         display:'flex',
         width:'100%',
-        height:'calc(100vh - 50px)',
+        height:'100%',
         position:'relative',
         flexDirection:'column',
-        marginTop: 50,
+        marginTop: 60,
     } 
 }
 
-export const AssignedTasks = (props) =>{
-
-    const back = () => {
-        props.history.push('/')
-    }
+export const AssignedTasks = () =>{
 
     return(
         <div style={styles.root}>
             <SideBar 
                 title={'ASSIGNED TASKS'}
-                backLink = {'/'}
+                backLink = {`/assigned-projects`}
             />
             <div style={styles.content}>
                 <AssinedTaskList />

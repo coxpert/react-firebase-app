@@ -93,13 +93,22 @@ export const SnagDetails = (props) =>{
             }
                     
             firestore.collection('reports').add({...data}).then(()=>{
-                setUploading(false)
-                NotificationManager.success('Successfully Reported')
-                if(assigned){
-                     history.push(`/assigned-tasks`)
-                }else{
-                    history.push(`/report-project/${projectId}`)
-                }
+
+                firestore.collection('projects').doc(projectId).set({
+                    assigned: assigned,
+                },{merge: true}).then(()=>{
+                    setUploading(false)
+                    NotificationManager.success('Successfully Reported')
+                    if(assigned){
+                         history.push(`/assigned-projects`)
+                    }else{
+                        history.push(`/report-project/${projectId}`)
+                    }
+                })
+                
+            }).catch(error=>{
+                console.log(error)
+                NotificationManager.error(error.message);
             })
         }
     }

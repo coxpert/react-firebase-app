@@ -10,7 +10,7 @@ import {makeStyles} from '@material-ui/styles'
 const useStyles = makeStyles(()=>({
     root:{
         width:'100%',
-        marginTop: 60,
+        marginTop: '60x',
     },
     progressContaner:{
         display: 'flex',

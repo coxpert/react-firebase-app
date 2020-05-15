@@ -16,6 +16,11 @@ const styles = {
         maxWidth:'100%',
         maxHeight:'300px', 
     },
+    logoContainer:{
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+    },
     addButton:{
         position:'absolute',
         left:10,
@@ -77,7 +82,7 @@ export const Dashboard = (props) =>{
         if(value === 'all'){
             history.push('/all-project')
         }else if(value === 'assigned'){
-            history.push('/assigned-tasks')
+            history.push('/assigned-projects')
         }else if(value === 'signdedoff'){
             history.push('/signed-off-task')
         }else{

@@ -182,6 +182,14 @@ const SideBar = (props) => {
         </Box>
         <Divider />
         <List>
+
+            <Link to="/">
+              <ListItem button >
+                <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                <ListItemText primary={'Dashboard'} />
+              </ListItem>
+            </Link>
+
             <Link to="/all-project">
               <ListItem button >
                 <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
@@ -196,7 +204,7 @@ const SideBar = (props) => {
               </ListItem>
             </Link>
 
-            <Link to="/assigned-tasks">
+            <Link to="/assigned-projects">
               <ListItem button >
                 <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
                 <ListItemText primary={'Assigned Tasks'} />

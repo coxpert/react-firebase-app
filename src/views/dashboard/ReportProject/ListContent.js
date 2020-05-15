@@ -8,6 +8,7 @@ import ReportsProjectItem from './ReportsProjectItem'
 const styles = {
     root:{
         width:'100%',
+        marginTop: 20,
     },
     progressContaner:{
         display: 'flex',

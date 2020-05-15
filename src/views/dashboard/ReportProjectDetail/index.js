@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {styles} from './style'
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect} from 'react-redux-firebase';

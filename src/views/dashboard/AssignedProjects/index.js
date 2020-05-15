@@ -1,9 +1,13 @@
 import React from 'react'
-import ProjectList from './ProjectList'
+import AssignedProjectList from './AssignedProjectList';
 import {SideBar} from 'Components'
+
 const styles = {
     root:{
         width:'100%',
+        display:'flex',
+        alignItems:'center',
+        flexDirection:'column'
     },
     header:{
         width: '100%',
@@ -23,9 +27,8 @@ const styles = {
         margin:'auto',
         zIndex: 3,
     },
-    
     backButton:{
-        position:'relative',
+        position:'absolute',
         width: '50px',
         height: '20px',
         display:'flex',
@@ -34,24 +37,26 @@ const styles = {
         fontSize:'20px',
         left: '0px'
     },
-    projectListContent:{
-        width: '100%',
-        marginTop:'60px',
-        paddingTop: 10,
-    }
+    content: {
+        display:'flex',
+        width:'100%',
+        height:'100%',
+        position:'relative',
+        flexDirection:'column',
+        marginTop: 60,
+    } 
 }
 
-export const AllProjects = (props) =>{
-
+export const AssignedProjects = (props) =>{
 
     return(
         <div style={styles.root}>
             <SideBar 
-                title={"ALL PROJECTS TAB"}
+                title={'ASSIGNED TASKS'}
                 backLink = {'/'}
             />
-            <div style={styles.projectListContent}>
-                <ProjectList />
+            <div style={styles.content}>
+                <AssignedProjectList />
             </div>
         </div>
     )

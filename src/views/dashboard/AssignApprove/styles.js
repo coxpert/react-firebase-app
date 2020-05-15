@@ -22,7 +22,8 @@ export const styles = {
         width:'100%',
         display:'flex',
         alignItems:'center',
-        flexDirection:'column'
+        flexDirection:'column',
+        height: '100%',
     },
     content:{
         width:'100%',

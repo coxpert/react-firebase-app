@@ -2,9 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import AssignedTaskItem from './AssignedTaskItem'
-import {withRouter} from 'react-router-dom';
-
+import AssignedProjectItem from './AssignedProjectItem'
 const styles = {
     root:{
         width:'100%',
@@ -35,27 +33,23 @@ const styles = {
     }
 }
 
-const AssignedTaskList = (props) => {
+const AssignedProjectList = () => {
 
-    const {match} = props;
+    useFirestoreConnect([{collection: 'projects', where:['assigned', '==' , true ]}])
 
-    const projectId = match.params.projectId
+    const projects = useSelector(state => state.firestore.ordered.projects)
 
-    useFirestoreConnect([{collection: 'reports',where:[['projectId','==', projectId],['assigned','==', true]]}])
-
-    const reports = useSelector(state => state.firestore.ordered.reports)
-
-    console.log(reports)
+    console.log(projects)
     
     return (
         <div style={styles.root}>
             {
-                reports?
+                projects?
                 <div>
                     {
-                        reports.map(report=>(
-                            <div key={report.id}>
-                                <AssignedTaskItem report = {report} />
+                        projects.map(project=>(
+                            <div key={project.id}>
+                                <AssignedProjectItem project = {project} />
                             </div>
                         ))
                     }
@@ -68,4 +62,4 @@ const AssignedTaskList = (props) => {
     )
 }
 
-export default  withRouter(AssignedTaskList);
+export default  AssignedProjectList;
